@@ -37,3 +37,4 @@ jobs:
         keyname1: 'ConnectionStrings'
         keyname2: 'SqlServerConnection'
         valueToSet: '${{ secrets.CONNECTIONSTRING }}'
+        
