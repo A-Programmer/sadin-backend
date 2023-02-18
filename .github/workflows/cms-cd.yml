@@ -3,7 +3,6 @@ name: Continuos Deployment
 on:
   push:
     branches: [ "main" ]
-  workflow_dispatch:
 
 jobs:
   run_if:
