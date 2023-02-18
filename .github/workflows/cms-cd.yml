@@ -5,8 +5,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  run_if:
-    if: contains(github.event.pull_request.labels.*.name, 'cms')
+  build:
     runs-on: self-hosted
 
     steps:
