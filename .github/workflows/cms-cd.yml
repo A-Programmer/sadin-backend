@@ -3,11 +3,9 @@ name: Continuos Deployment
 on:
   push:
     branches: [ "main" ]
-  workflow_dispatch:
 
 jobs:
-  run_if:
-    if: contains(github.event.pull_request.labels.*.name, 'cms')
+  build:
     runs-on: self-hosted
 
     steps:
