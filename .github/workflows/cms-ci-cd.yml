@@ -2,8 +2,8 @@ name: .NET - CMS - CI/CD
 
 on:
   pull_request:
-    branches: [ "develop" ]
     types: [ closed ]
+    branches: [ "develop" ]
 
 jobs:
   run_if:
