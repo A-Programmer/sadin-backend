@@ -1,0 +1,21 @@
+name: Continuos Deployment
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  run_if:
+    if: contains(github.event.pull_request.labels.*.name, 'cms')
+    runs-on: self-hosted
+
+    steps:
+    - name: Deploy to IIS
+      run: |
+        iisreset /stop
+        Copy-Item ./build/* C:/sadin.dev/cms-api -Recurse -Force
+        iisreset /start
+    
+    - name: Curl the website as a smoke test
+      run: curl https://cms-api.sadin.dev/swagger/index.html
