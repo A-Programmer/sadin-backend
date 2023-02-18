@@ -1,5 +1,8 @@
 name: .NET - CMS - CI/CD
 
+run_if:
+  if: contains(github.event.pull_request.labels.*.name, 'cms')
+  
 on:
   pull_request:
     types: [ closed ]
