@@ -44,11 +44,11 @@ public static class Extensions
 
     public static WebApplication UseSharedServices(this WebApplication app)
     {
-        if (app.Environment.IsDevelopment())
-        {
+        // if (app.Environment.IsDevelopment())
+        // {
             app.UseSwagger();
             app.UseSwaggerUI();
-        }
+        // }
         app.UseMiddleware<ErrorHandlerMiddleware>();
 
         app.UseAuthentication();
