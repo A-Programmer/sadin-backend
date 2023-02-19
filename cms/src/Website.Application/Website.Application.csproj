@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.5.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
   </ItemGroup>
   <ItemGroup>
@@ -12,5 +13,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ContactUsMessages\Queries" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Common\.DS_Store" />
   </ItemGroup>
 </Project>

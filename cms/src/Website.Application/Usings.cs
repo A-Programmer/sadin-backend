@@ -3,3 +3,8 @@ global using MediatR;
 global using Website.Domain;
 global using KSFramework.Responses;
 global using KSFramework.Pagination;
+global using FluentValidation;
+global using Website.Application.Common.Commands;
+global using Website.Application.Common.Queries;
+global using Website.Application.Common.Events;
+global using Website.Application.Common.Behaviours;

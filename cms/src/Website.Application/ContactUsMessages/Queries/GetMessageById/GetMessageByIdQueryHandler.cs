@@ -1,6 +1,6 @@
 namespace Website.Application.ContactUsMessages.Queries.GetMessageById;
 
-public class GetMessageByIdQueryHandler : IRequestHandler<GetMessageByIdQuery, GetMessageByIdDto>
+public class GetMessageByIdQueryHandler : IQueryHandler<GetMessageByIdQuery, GetMessageByIdDto>
 {
     private readonly IUnitOfWork _uow;
     public GetMessageByIdQueryHandler(IUnitOfWork uow) => _uow = uow ?? throw new ArgumentNullException(nameof(uow));
