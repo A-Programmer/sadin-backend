@@ -1,4 +1,4 @@
-name: .NET - CMS - CI/CD
+name: .NET - CMS - CI
 
 on:
   pull_request:
