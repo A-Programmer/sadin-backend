@@ -13,7 +13,7 @@ jobs:
     - name: Deploy to IIS
       run: |
         iisreset /stop
-        Copy-Item ./build/* C:/sadin.dev/cms-api -Recurse -Force
+        Copy-Item ./build/cms/* C:/sadin.dev/cms-api -Recurse -Force
         iisreset /start
     
     - name: Curl the website as a smoke test

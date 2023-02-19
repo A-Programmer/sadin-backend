@@ -7,6 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
+  # CMS Service
   run_if:
     if: contains(github.event.pull_request.labels.*.name, 'cms')
     runs-on: self-hosted
@@ -14,22 +15,22 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore Sadin.Cms.sln
     
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build Sadin.Cms.sln --no-restore
     
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test Sadin.Cms.sln --no-build --verbosity normal
 
     - name: Publish 
       run: |
-        dotnet publish -c Release -o build
+        dotnet publish Sadin.Cms.sln -c Release -o build/cms
     
     - name: Update Connection String
       uses: benday-inc/set-property-value-in-appsettings@main
       with:
-        pathToSettingsFile: '${{ github.workspace }}\build\appsettings.json'
+        pathToSettingsFile: '${{ github.workspace }}\build\cms\appsettings.json'
         keyname1: 'ConnectionStrings'
         keyname2: 'SqlServerConnection'
         valueToSet: '${{ secrets.CONNECTIONSTRING }}'
