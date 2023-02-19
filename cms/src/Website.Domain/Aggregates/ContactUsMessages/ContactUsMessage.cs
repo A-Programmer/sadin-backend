@@ -1,6 +1,8 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Website.Domain.Aggregates.ContactUsMessages;
 
-public class ContactUsMessage : BaseEntity<Guid>, IAggregateRoot
+public class ContactUsMessage : BaseEntity<Guid>, IAggregateRoot, IValidatableObject
 {
     public ContactUsMessage(Guid id, string title, string content, DateTimeOffset createdAt, bool isChecked, DateTimeOffset? checkedDate = null, string fullName = null, string email = null, string phoneNumber = null)
     {
@@ -45,4 +47,14 @@ public class ContactUsMessage : BaseEntity<Guid>, IAggregateRoot
     }
     public void MarkAsUnChecked() => IsChecked = false; // TODO : Adding Domain Event
 
+    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+    {
+        if (string.IsNullOrEmpty(Title))
+            yield return new ValidationResult("Title can not be null or empty");
+        else
+            yield return ValidationResult.Success;
+        
+        
+        
+    }
 }
