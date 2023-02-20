@@ -2,7 +2,7 @@ using Website.Domain.Aggregates.ContactUsMessages;
 
 namespace Website.Application.ContactUsMessages.Commands.CreateMessage;
 
-public class CreateContactUsMessageCommandHandler : IRequestHandler<CreateContactUsMessageCommand, BaseResponse<Guid>>
+public class CreateContactUsMessageCommandHandler : ICommandHandler<CreateContactUsMessageCommand, BaseResponse<Guid>>
 {
     private readonly IUnitOfWork _uow;
     public CreateContactUsMessageCommandHandler(IUnitOfWork uow) =>

@@ -4,7 +4,7 @@ using Website.Domain.Aggregates.ContactUsMessages;
 
 namespace Website.Application.ContactUsMessages.Queries.GetUncheckedMessages;
 
-public class GetUncheckedMessagesQuery : Paginated, IRequest<PaginatedList<GetUncheckedMessagesDto>>
+public class GetUncheckedMessagesQuery : Paginated, IQuery<PaginatedList<GetUncheckedMessagesDto>>
 {
     public GetUncheckedMessagesQuery(int? pageNumber, int? pageSize, string searchString = "", string ordeBy = "", bool desc = false)
         : base(pageNumber, pageSize)

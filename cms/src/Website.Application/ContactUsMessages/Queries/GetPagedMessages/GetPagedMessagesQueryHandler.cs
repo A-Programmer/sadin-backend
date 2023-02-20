@@ -1,6 +1,6 @@
 namespace Website.Application.ContactUsMessages.Queries.GetPagedMessages;
 
-public class GetPagedMessagesQueryHandler : IRequestHandler<GetPagedMessagesQuery, PaginatedList<GetPagedMessagesDto>>
+public class GetPagedMessagesQueryHandler : IQueryHandler<GetPagedMessagesQuery, PaginatedList<GetPagedMessagesDto>>
 {
     private readonly IUnitOfWork _uow;
     public GetPagedMessagesQueryHandler(IUnitOfWork uow) => _uow = uow ?? throw new ArgumentNullException(nameof(uow));
