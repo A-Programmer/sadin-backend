@@ -1,12 +1,13 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace Website.Domain.Aggregates.ContactUsMessages;
 
-public class ContactUsMessage : BaseEntity<Guid>, IAggregateRoot, IValidatableObject
+public sealed class ContactUsMessage : Entity, IAggregateRoot
 {
-    public ContactUsMessage(Guid id, string title, string content, DateTimeOffset createdAt, bool isChecked, DateTimeOffset? checkedDate = null, string fullName = null, string email = null, string phoneNumber = null)
+    // TODO: Use builder design pattern to reduce number of arguments of constructor
+    // TODO: Add xml comments to explain the class and its members.
+    public ContactUsMessage(Guid id, string title, string content, DateTimeOffset createdAt,
+        bool isChecked, DateTimeOffset? checkedDate = null, string fullName = null,
+        string email = null, string phoneNumber = null) : base(id)
     {
-        Id = id;
         FullName = fullName;
         Email = email;
         PhoneNumber = phoneNumber;
@@ -26,7 +27,7 @@ public class ContactUsMessage : BaseEntity<Guid>, IAggregateRoot, IValidatableOb
     public DateTimeOffset? CheckedDate { get; private set; }
     public bool IsChecked { get; private set; }
     
-    protected ContactUsMessage()
+    protected ContactUsMessage(Guid id) : base(id)
     { }
 
     public static ContactUsMessage Create(string title, string content, string fullName = null, string email = null,
@@ -47,14 +48,4 @@ public class ContactUsMessage : BaseEntity<Guid>, IAggregateRoot, IValidatableOb
     }
     public void MarkAsUnChecked() => IsChecked = false; // TODO : Adding Domain Event
 
-    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-    {
-        if (string.IsNullOrEmpty(Title))
-            yield return new ValidationResult("Title can not be null or empty");
-        else
-            yield return ValidationResult.Success;
-        
-        
-        
-    }
 }
