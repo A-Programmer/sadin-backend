@@ -1,4 +1,4 @@
-namespace Website.Api.ViewModels.ContactUs;
+namespace Website.Presentation.ViewModels.ContactUs;
 
 public class CreateContactUsMessageViewModel
 {

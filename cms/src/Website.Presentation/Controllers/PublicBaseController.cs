@@ -1,7 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
 using Website.Common.WebFrameworks;
 
-namespace Website.Api.Controllers;
+namespace Website.Presentation.Controllers;
 
 public class PublicBaseController : BaseController
 {
