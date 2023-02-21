@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sadin.Cms.Domain.UnitTests"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Website.Presentation", "cms\src\Website.Presentation\Website.Presentation.csproj", "{9137D8C6-D0CC-4B69-A0EA-209DCDEFCF55}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Website.ArchitectureTests", "cms\tests\Website.ArchitectureTests\Website.ArchitectureTests.csproj", "{26A652A8-2911-4C3D-BB19-52D268D07085}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -68,6 +70,10 @@ Global
 		{9137D8C6-D0CC-4B69-A0EA-209DCDEFCF55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9137D8C6-D0CC-4B69-A0EA-209DCDEFCF55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9137D8C6-D0CC-4B69-A0EA-209DCDEFCF55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26A652A8-2911-4C3D-BB19-52D268D07085}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26A652A8-2911-4C3D-BB19-52D268D07085}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26A652A8-2911-4C3D-BB19-52D268D07085}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26A652A8-2911-4C3D-BB19-52D268D07085}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{11D5CB98-A4C2-45E2-99F7-A6DB7E6C6909} = {DB2BF6A9-A501-4F6A-AF05-06E7A5B74B5F}
@@ -81,5 +87,6 @@ Global
 		{7D0A9BF9-3DFC-4CD7-8EFF-B3A890E75BEC} = {0555D29A-39A6-491B-959D-ECB32E41A19F}
 		{4FD7C554-AEB6-488B-B483-D93CEF91A42B} = {7D0A9BF9-3DFC-4CD7-8EFF-B3A890E75BEC}
 		{9137D8C6-D0CC-4B69-A0EA-209DCDEFCF55} = {11D5CB98-A4C2-45E2-99F7-A6DB7E6C6909}
+		{26A652A8-2911-4C3D-BB19-52D268D07085} = {0555D29A-39A6-491B-959D-ECB32E41A19F}
 	EndGlobalSection
 EndGlobal
