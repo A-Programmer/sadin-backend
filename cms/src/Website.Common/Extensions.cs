@@ -12,10 +12,10 @@ public static class Extensions
 {
     public static IServiceCollection AddSharedServices(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddControllers(options =>
-        {
-            options.Filters.Add<ApiExceptionFilterAttribute>();
-        });
+        // services.AddControllers(options =>
+        // {
+        //     options.Filters.Add<ApiExceptionFilterAttribute>();
+        // });
 
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();

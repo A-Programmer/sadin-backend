@@ -1,10 +1,10 @@
 using KSFramework;
-using KSFramework.Pagination;
 using KSFramework.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Website.Api.ViewModels.ContactUs;
+using Website.Presentation.ViewModels.ContactUs;
 using Website.Application.ContactUsMessages.Commands.MarkMessageAsChecked;
 using Website.Application.ContactUsMessages.Commands.MarkMessageAsUnchecked;
 using Website.Application.ContactUsMessages.Commands.RemoveMessage;
@@ -13,7 +13,7 @@ using Website.Application.ContactUsMessages.Queries.GetPagedMessages;
 using Website.Common.WebFrameworks.Routing;
 using Website.Services.AuthServices;
 
-namespace Website.Api.Controllers;
+namespace Website.Presentation.Controllers;
 
 public class SecureContactUsController : SecureBaseController
 {

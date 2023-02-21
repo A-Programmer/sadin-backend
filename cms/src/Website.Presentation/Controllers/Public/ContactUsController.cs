@@ -1,11 +1,11 @@
 using KSFramework.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Website.Api.ViewModels.ContactUs;
 using Website.Application.ContactUsMessages.Commands.CreateMessage;
 using Website.Common.WebFrameworks.Routing;
+using Website.Presentation.ViewModels.ContactUs;
 
-namespace Website.Api.Controllers;
+namespace Website.Presentation.Controllers;
 
 public class ContactUsController : PublicBaseController
 {

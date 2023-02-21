@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Website.Application;
 using Website.Common;
 using Website.Infrastructure;
+using Website.Presentation;
 using Website.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -37,6 +38,7 @@ builder.Services.AddCors(c =>
 //         options. UseHttps("server-cert","123456");
 //     });
 // });
+builder.Services.AddPresentationLayer();
 builder.Services.AddApplicationLayerServices();
 builder.Services.AddInfrastructureLayerServices(Configuration);
 builder.Services.AddServicesLayer();
