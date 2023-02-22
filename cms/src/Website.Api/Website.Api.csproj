@@ -22,6 +22,7 @@
     <ProjectReference Include="..\Website.Application\Website.Application.csproj" />
     <ProjectReference Include="..\Website.Common\Website.Common.csproj" />
     <ProjectReference Include="..\Website.Infrastructure\Website.Infrastructure.csproj" />
+    <ProjectReference Include="..\Website.Presentation\Website.Presentation.csproj" />
     <ProjectReference Include="..\Website.Services\Website.Services.csproj" />
   </ItemGroup>
 </Project>
