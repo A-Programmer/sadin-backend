@@ -10,15 +10,21 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
-    <PackageReference Include="xunit" Version="2.4.1" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="coverlet.collector" Version="3.1.2">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
+    <PackageReference Include="MSTest.TestAdapter" Version="2.2.8" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.2.8" />
+    <PackageReference Include="coverlet.collector" Version="3.1.2" />
+    <PackageReference Include="NetArchTest.Rules" Version="1.3.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Website.Api\Website.Api.csproj" />
+    <ProjectReference Include="..\..\src\Website.Application\Website.Application.csproj" />
+    <ProjectReference Include="..\..\src\Website.Common\Website.Common.csproj" />
+    <ProjectReference Include="..\..\src\Website.Domain\Website.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Website.Infrastructure\Website.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Website.Presentation\Website.Presentation.csproj" />
+    <ProjectReference Include="..\..\src\Website.Services\Website.Services.csproj" />
+    <ProjectReference Include="..\UnitTests\Sadin.Cms.Domain.UnitTests\Sadin.Cms.Domain.UnitTests.csproj" />
   </ItemGroup>
 
 </Project>
