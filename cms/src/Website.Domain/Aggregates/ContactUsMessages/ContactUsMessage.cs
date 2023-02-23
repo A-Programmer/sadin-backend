@@ -2,9 +2,7 @@ namespace Website.Domain.Aggregates.ContactUsMessages;
 
 public sealed class ContactUsMessage : Entity, IAggregateRoot
 {
-    // TODO: Use builder design pattern to reduce number of arguments of constructor
-    // TODO: Add xml comments to explain the class and its members.
-    public ContactUsMessage(Guid id, string title, string content, DateTimeOffset createdAt,
+    private ContactUsMessage(Guid id, string title, string content, DateTimeOffset createdAt,
         bool isChecked, DateTimeOffset? checkedDate = null, string fullName = null,
         string email = null, string phoneNumber = null) : base(id)
     {

@@ -1,3 +1,3 @@
 namespace Website.Application.ContactUsMessages.Queries.GetMessageById;
 
-public record GetMessageByIdQuery(Guid Id) : IQuery<GetMessageByIdDto>;
+public sealed record GetMessageByIdQuery(Guid Id) : IQuery<GetMessageByIdDto>;

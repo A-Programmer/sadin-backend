@@ -1,3 +1,3 @@
 namespace Website.Application.ContactUsMessages.Commands.RemoveMessage;
 
-public record RemoveMessageCommand(Guid Id) : ICommand<BaseResponse<Guid>>;
+public sealed record RemoveMessageCommand(Guid Id) : ICommand<BaseResponse<Guid>>;
