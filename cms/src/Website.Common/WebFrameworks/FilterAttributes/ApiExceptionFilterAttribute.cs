@@ -1,5 +1,5 @@
 using KSFramework.Exceptions;
-using KSFramework.Responses;
+using KSFramework.Responses.FailedResponses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;

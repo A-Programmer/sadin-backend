@@ -1,4 +1,4 @@
-using KSFramework.Responses;
+using KSFramework.Responses.SuccessResponses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Website.Application.ContactUsMessages.Commands.CreateMessage;

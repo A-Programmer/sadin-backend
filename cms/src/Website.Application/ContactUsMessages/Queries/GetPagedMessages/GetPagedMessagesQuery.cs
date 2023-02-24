@@ -4,7 +4,7 @@ using Website.Domain.Aggregates.ContactUsMessages;
 
 namespace Website.Application.ContactUsMessages.Queries.GetPagedMessages;
 
-public class GetPagedMessagesQuery : Paginated, IQuery<PaginatedList<GetPagedMessagesDto>>
+public sealed class GetPagedMessagesQuery : Paginated, IQuery<PaginatedList<GetPagedMessagesDto>>
 {
     public GetPagedMessagesQuery(int? pageNumber, int? pageSize, string searchString = "", string ordeBy = "", bool desc = false)
         : base(pageNumber, pageSize)

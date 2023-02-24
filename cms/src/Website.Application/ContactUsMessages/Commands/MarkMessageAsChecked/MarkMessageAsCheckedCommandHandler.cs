@@ -1,6 +1,6 @@
 namespace Website.Application.ContactUsMessages.Commands.MarkMessageAsChecked;
 
-public class MarkMessageAsCheckedCommandHandler : ICommandHandler<MarkMessageAsCheckedCommand, BaseResponse<Guid>>
+internal sealed class MarkMessageAsCheckedCommandHandler : ICommandHandler<MarkMessageAsCheckedCommand, BaseResponse<Guid>>
 {
     private readonly IUnitOfWork _uow;
     public MarkMessageAsCheckedCommandHandler(IUnitOfWork uow) => _uow = uow ?? throw new ArgumentNullException(nameof(uow));

@@ -1,6 +1,6 @@
 namespace Website.Application.ContactUsMessages.Queries.GetUncheckedMessages;
 
-public class GetUncheckedMessagesQueryHandler : IQueryHandler<GetUncheckedMessagesQuery, PaginatedList<GetUncheckedMessagesDto>>
+internal sealed class GetUncheckedMessagesQueryHandler : IQueryHandler<GetUncheckedMessagesQuery, PaginatedList<GetUncheckedMessagesDto>>
 {
     private readonly IUnitOfWork _uow;
     public GetUncheckedMessagesQueryHandler(IUnitOfWork uow) => _uow = uow ?? throw new ArgumentNullException(nameof(uow));
