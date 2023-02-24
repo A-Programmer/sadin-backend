@@ -1,6 +1,6 @@
 namespace Website.Application.ContactUsMessages.Queries.GetUncheckedMessagesCount;
 
-public class GetUncheckedMessagesCountQueryHandler : IQueryHandler<GetUncheckedMessagesCountQuery, int>
+internal sealed  class GetUncheckedMessagesCountQueryHandler : IQueryHandler<GetUncheckedMessagesCountQuery, int>
 {
     private readonly IUnitOfWork _uow;
     public GetUncheckedMessagesCountQueryHandler(IUnitOfWork uow) => _uow = uow ?? throw new ArgumentNullException(nameof(uow));

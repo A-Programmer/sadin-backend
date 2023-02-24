@@ -1,6 +1,6 @@
 namespace Website.Application.ContactUsMessages.Commands.MarkMessageAsUnchecked;
 
-public class MarkMessageAsUncheckedCommandHandler : ICommandHandler<MarkMessageAsUncheckedCommand, BaseResponse<Guid>>
+internal sealed class MarkMessageAsUncheckedCommandHandler : ICommandHandler<MarkMessageAsUncheckedCommand, BaseResponse<Guid>>
 {
     private readonly IUnitOfWork _uow;
     public MarkMessageAsUncheckedCommandHandler(IUnitOfWork uow) => _uow = uow ?? throw new ArgumentNullException(nameof(uow));

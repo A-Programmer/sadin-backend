@@ -1,3 +1,3 @@
 namespace Website.Application.ContactUsMessages.Commands.MarkMessageAsChecked;
 
-public record MarkMessageAsCheckedCommand(Guid Id) : ICommand<BaseResponse<Guid>>;
+public sealed record MarkMessageAsCheckedCommand(Guid Id) : ICommand<BaseResponse<Guid>>;

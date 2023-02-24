@@ -1,6 +1,6 @@
 namespace Website.Application.ContactUsMessages.Commands.RemoveMessage;
 
-public class RemoveMessageCommandHandler : ICommandHandler<RemoveMessageCommand, BaseResponse<Guid>>
+internal sealed class RemoveMessageCommandHandler : ICommandHandler<RemoveMessageCommand, BaseResponse<Guid>>
 {
     private readonly IUnitOfWork _uow;
     public RemoveMessageCommandHandler(IUnitOfWork uow) => _uow = uow ?? throw new ArgumentNullException(nameof(uow));
