@@ -1,6 +1,8 @@
+using KSFramework.Primitives;
+
 namespace Website.Domain.Aggregates.ContactUsMessages;
 
-public sealed class ContactUsMessage : Entity, IAggregateRoot
+public sealed class ContactUsMessage : AggregateRoot
 {
     private ContactUsMessage(Guid id, string title, string content, DateTimeOffset createdAt,
         bool isChecked, DateTimeOffset? checkedDate = null, string fullName = null,

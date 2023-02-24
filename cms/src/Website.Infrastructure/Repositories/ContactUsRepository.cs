@@ -1,4 +1,3 @@
-
 using System.Linq.Expressions;
 using KSFramework.Pagination;
 using Microsoft.EntityFrameworkCore;
@@ -7,7 +6,7 @@ using Website.Infrastructure.Data;
 
 namespace Website.Infrastructure.Repositories;
 
-public class ContactUsRepository : Repository<ContactUsMessage>, IContactUsRepository
+public class ContactUsRepository : GenericRepository<ContactUsMessage>, IContactUsRepository
 {
     public ContactUsRepository(DbContext context) : base(context)
     {

@@ -1,7 +1,6 @@
 using System.Security.Claims;
 using KSFramework;
-using KSFramework.Enums;
-using KSFramework.Responses;
+using KSFramework.Responses.SuccessResponses;
 using Microsoft.AspNetCore.Mvc;
 using Website.Common.WebFrameworks.Routing;
 
