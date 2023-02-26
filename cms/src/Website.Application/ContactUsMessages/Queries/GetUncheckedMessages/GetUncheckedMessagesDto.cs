@@ -13,7 +13,7 @@ public class GetUncheckedMessagesDto
         CheckedDate = message.CheckedDate;
     }
     public Guid Id { get; private set; }
-    public string FullName { get; private set; }
+    public string? FullName { get; private set; }
     public string Title { get; private set; }
     public DateTimeOffset CreatedDate { get; private set; }
     public DateTimeOffset? CheckedDate { get; private set; }

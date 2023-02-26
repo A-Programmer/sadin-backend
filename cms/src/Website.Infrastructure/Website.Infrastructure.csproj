@@ -8,6 +8,6 @@
     <ProjectReference Include="..\Website.Application\Website.Application.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Repositories" />
+    <Folder Include="Migrations" />
   </ItemGroup>
 </Project>

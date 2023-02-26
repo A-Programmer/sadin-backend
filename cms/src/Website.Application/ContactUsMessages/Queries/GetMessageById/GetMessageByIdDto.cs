@@ -18,9 +18,9 @@ public class GetMessageByIdDto
     }
     
     public Guid Id { get; private set; }
-    public string FullName { get; private set; }
-    public string Email { get; private set; }
-    public string PhoneNumber { get; private set; }
+    public string? FullName { get; private set; }
+    public string? Email { get; private set; }
+    public string? PhoneNumber { get; private set; }
     public string Title { get; private set; }
     public string Content { get; private set; }
     public DateTimeOffset CreatedDate { get; private set; }

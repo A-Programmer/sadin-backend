@@ -1,4 +1,5 @@
 using Website.Domain;
+using Website.Domain.Aggregates.Blog;
 using Website.Domain.Aggregates.ContactUsMessages;
 using Website.Infrastructure.Data;
 using Website.Infrastructure.Repositories;
@@ -12,6 +13,9 @@ public class UnitOfWork : IUnitOfWork
     
     private ContactUsRepository _contactUsMessages;
     public IContactUsRepository ContactUsMessages => _contactUsMessages ??= new ContactUsRepository(_db);
+
+    private PostRepository _posts;
+    public IPostRepository Posts => _posts ??= new(_db);
     public async Task<int> CommitAsync()
     {
         return await _db.SaveChangesAsync();

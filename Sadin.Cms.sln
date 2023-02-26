@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cms", "cms", "{DB2BF6A9-A501-4F6A-AF05-06E7A5B74B5F}"
+	ProjectSection(SolutionItems) = preProject
+		cms\README.md = cms\README.md
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{11D5CB98-A4C2-45E2-99F7-A6DB7E6C6909}"
 EndProject
