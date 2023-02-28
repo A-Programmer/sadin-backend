@@ -26,4 +26,29 @@ public static class Routes
             public const string ChangeStatus = "{id}/change_status";
         }
     }
+
+    public static class Posts
+    {
+        public static class Categories
+        {
+            public static class Get
+            {
+                public const string GetAll = "";
+                public const string GetById = "{id}";
+                public const string GetBySlug = "{slug}";
+            }
+        }
+        public static class Post
+        {
+            public const string Add = "";
+        }
+        public static class Delete
+        {
+            public const string Remove = "{id}";
+        }
+        public static class Edit
+        {
+            public const string Update = "";
+        }
+    }
 }

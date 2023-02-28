@@ -6,9 +6,9 @@ namespace Website.Domain.Aggregates.Blog.ValueObjects;
 [Serializable]
 public sealed class View : ValueObject, ISerializable
 {
-    public DateTime ViewDate { get; }
-    public PostViewUserIp UserIp { get; }
-    public Guid PostId { get; }
+    public DateTime ViewDate { get; private set; }
+    public PostViewUserIp UserIp { get; private set; }
+    public Guid PostId { get; private set; }
 
     private View(PostViewUserIp userIp, Guid postId)
     {

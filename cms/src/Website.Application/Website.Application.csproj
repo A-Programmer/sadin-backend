@@ -13,6 +13,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ContactUsMessages\Queries" />
+    <Folder Include="PostCategories\Commands" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Common\.DS_Store" />

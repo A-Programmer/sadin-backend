@@ -10,6 +10,9 @@ public sealed class Comment : EntityWithSoftDelete, ISerializable
 {
     public PostCommentContent Content { get; private set; }
     public bool IsApproved { get; private set; }
+    public bool IsChecked { get; private set; }
+
+    public DateTimeOffset? CheckedDate { get; private set; }
 
     private List<Comment> _replies = new();
     public IReadOnlyCollection<Comment> Replies => _replies.AsReadOnly();
@@ -36,13 +39,56 @@ public sealed class Comment : EntityWithSoftDelete, ISerializable
     {
         
     }
-    public void SetParentId(Guid? parentId) => ParentId = parentId;
 
-    public void SetPostId(Guid postId) => PostId = postId;
+    public Comment SetParentId(Guid? parentId)
+    {
+        ParentId = parentId;
+        return this;
+    }
+
+    public Comment SetPostId(Guid postId)
+    {
+        PostId = postId;
+        return this;
+    }
 
     public void AddReply(Comment reply) => _replies.Add(reply);
 
-    public void ChangeStatus(bool isApproved) => IsApproved = isApproved;
+    public Comment ChangeApproveStatus(bool isApproved)
+    {
+        IsApproved = isApproved;
+        return this;
+    }
+
+    public Comment Approve()
+    {
+        IsApproved = true;
+        return this;
+    }
+
+    public Comment Reject()
+    {
+        IsApproved = false;
+        return this;
+    }
+
+    public Comment ChangeCheckStatus(bool newCheckStatus)
+    {
+        IsChecked = newCheckStatus;
+        return this;
+    }
+
+    public Comment Checked()
+    {
+        IsChecked = true;
+        return this;
+    }
+
+    public Comment NotChecked()
+    {
+        IsChecked = false;
+        return this;
+    }
 
     public void SetReplies(List<Comment> postComment) => _replies = postComment;
     
@@ -54,6 +100,7 @@ public sealed class Comment : EntityWithSoftDelete, ISerializable
         info.AddValue(nameof(Id), Id);
         info.AddValue(nameof(Content), Content);
         info.AddValue(nameof(IsApproved), IsApproved);
+        info.AddValue(nameof(IsChecked), IsChecked);
         info.AddValue(nameof(ParentId), ParentId);
         info.AddValue(nameof(Parent ), Parent);
         info.AddValue(nameof(PostId), PostId);

@@ -5,25 +5,28 @@ using Website.Domain.Aggregates.Blog;
 
 namespace Website.Infrastructure.EntityConfigurations.BlogConfigurations;
 
-internal sealed class CategoriesConfigurations : EntityWithSoftDeleteMapConfiguration<Category>
+public sealed class CategoriesConfigurations : EntityWithSoftDeleteMapConfiguration<Category>
 {
     public override void Configure(EntityTypeBuilder<Category> builder)
     {
+        base.Configure(builder);
+        
         builder.ToTable("PostCategories");
         
-        builder.HasKey(x => x.Id);
+        // builder.OwnsMany(x => x.Posts, x =>
+        // {
+        //     x.ToTable("CategoriesPosts");
+        // });
+        builder.HasMany(x => x.Posts);
 
-        builder.HasMany<Post>(x => x.Posts);
-
-        builder.Ignore(x => x.Title);
-        builder.OwnsOne(x => x.Title);
-        builder.Ignore(x => x.Slug);
-        builder.OwnsOne(x => x.Slug);
-        builder.Ignore(x => x.Name);
-        builder.OwnsOne(x => x.Name);
-        builder.Ignore(x => x.Description);
-        builder.OwnsOne(x => x.Description);
         
-        base.Configure(builder);
+        builder.OwnsOne(x => x.Title)
+            .Property(x => x.Value).HasColumnName("Title");
+        builder.OwnsOne(x => x.Slug)
+            .Property(x => x.Value).HasColumnName("Slug");
+        builder.OwnsOne(x => x.Name)
+            .Property(x => x.Value).HasColumnName("Name");
+        builder.OwnsOne(x => x.Description)
+            .Property(x => x.Value).HasColumnName("Description");
     }
 }

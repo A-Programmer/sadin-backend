@@ -10,17 +10,18 @@ public sealed class CommentsConfigurations : EntityWithSoftDeleteMapConfiguratio
 {
     public override void Configure(EntityTypeBuilder<Comment> builder)
     {
+        base.Configure(builder); 
+        
         builder.ToTable("PostComments");
 
         builder.Ignore(x => x.Content);
-        builder.OwnsOne<PostCommentContent>(x => x.Content);
+        builder.OwnsOne<PostCommentContent>(x => x.Content)
+            .Property(x => x.Value).HasColumnName("Content");
         
         builder.HasKey(x => x.Id);
 
         builder.HasOne<Post>(x => x.Post)
             .WithMany(x => x.Comments)
             .OnDelete(DeleteBehavior.Cascade);
-     
-        base.Configure(builder);   
     }
 }

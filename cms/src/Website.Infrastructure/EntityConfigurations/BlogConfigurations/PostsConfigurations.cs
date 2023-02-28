@@ -9,31 +9,31 @@ public sealed class PostsConfigurations : AggregateRootWithSoftDeleteMapConfigur
 {
     public override void Configure(EntityTypeBuilder<Post> builder)
     {
+        base.Configure(builder);
         builder.ToTable("Posts");
 
         builder.OwnsMany(x => x.Views, c =>
         {
             c.ToTable("PostViews");
+            c.OwnsOne(x => x.UserIp).Property(x => x.Value).HasColumnName("UserIp");
         });
-
-        builder.OwnsMany(x => x.Categories, x =>
-        {
-            x.ToTable("PostCategories");
-        });
-
-        builder.OwnsMany(x => x.Keywords, x =>
-        {
-            x.ToTable("PostKeywords");
-        });
-
-        builder.OwnsOne(x => x.Title);
-        builder.OwnsOne(x => x.SeoTitle);
-        builder.OwnsOne(x => x.Description);
-        builder.OwnsOne(x => x.SeoDescription);
-        builder.OwnsOne(x => x.Content);
-        builder.OwnsOne(x => x.ImageUrl);
-        builder.OwnsOne(x => x.Slug);
         
-        base.Configure(builder);
+        builder.HasMany(x => x.Keywords);
+        builder.HasMany(x => x.Categories);
+
+        builder.OwnsOne(x => x.Title)
+            .Property(x => x.Value).HasColumnName("Title");
+        builder.OwnsOne(x => x.SeoTitle)
+            .Property(x => x.Value).HasColumnName("SeoTitle");
+        builder.OwnsOne(x => x.Description)
+            .Property(x => x.Value).HasColumnName("Description");
+        builder.OwnsOne(x => x.SeoDescription)
+            .Property(x => x.Value).HasColumnName("SeoDescription");
+        builder.OwnsOne(x => x.Content)
+            .Property(x => x.Value).HasColumnName("Content");
+        builder.OwnsOne(x => x.ImageUrl)
+            .Property(x => x.Value).HasColumnName("ImageUrl");
+        builder.OwnsOne(x => x.Slug)
+            .Property(x => x.Value).HasColumnName("Slug");
     }
 }

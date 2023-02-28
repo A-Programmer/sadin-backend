@@ -5,23 +5,23 @@ using Website.Domain.Aggregates.Blog;
 
 namespace Website.Infrastructure.EntityConfigurations.BlogConfigurations;
 
-internal sealed class KeywordsConfigurations : EntityWithSoftDeleteMapConfiguration<Keyword>
+public sealed class KeywordsConfigurations : EntityWithSoftDeleteMapConfiguration<Keyword>
 {
     public override void Configure(EntityTypeBuilder<Keyword> builder)
     {
+        base.Configure(builder);
+        
         builder.ToTable("PostsKeywords");
         
         builder.HasKey(x => x.Id);
 
         builder.HasMany<Post>(x => x.Posts);
-
-        builder.Ignore(x => x.Title);
-        builder.OwnsOne(x => x.Title);
-        builder.Ignore(x => x.Slug);
-        builder.OwnsOne(x => x.Slug);
-        builder.Ignore(x => x.Name);
-        builder.OwnsOne(x => x.Name);
         
-        base.Configure(builder);
+        builder.OwnsOne(x => x.Title)
+            .Property(x => x.Value).HasColumnName("Title");
+        builder.OwnsOne(x => x.Slug)
+            .Property(x => x.Value).HasColumnName("Slug");
+        builder.OwnsOne(x => x.Name)
+            .Property(x => x.Value).HasColumnName("Name");
     }
 }
