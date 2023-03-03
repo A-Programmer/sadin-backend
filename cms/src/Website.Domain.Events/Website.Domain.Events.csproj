@@ -4,8 +4,22 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+
+    <PackageId>Website.Domain.Events</PackageId>
+    <Version>1.0.0</Version>
     <Authors>Kamran Sadin</Authors>
+    <Company>Sadin</Company>
+    <CopyRight>Copyright (c) 2022 SadinCo.</CopyRight>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageIconUrl>https://api.nuget.org/v3-flatcontainer/ks-utilities/1.0.0.2/icon</PackageIconUrl>
+    <Owners>Kamran Sadin</Owners>
+    <PackageProjectUrl>https://github.com/A-Programmer/sadin-backebd</PackageProjectUrl>
+    <Summary>Domain Events for Website project</Summary>
+    <PackageTags>Sadin,Kamran,utility,dotnet,tools</PackageTags>
+    <Title>Website Domain Events</Title>
+    <Description>Domain events for Website project</Description>
+    <ReleaseNotes>Domain Events</ReleaseNotes>
+    <RepositoryUrl>https://github.com/A-Programmer/sadin-backebd</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
