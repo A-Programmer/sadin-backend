@@ -5,7 +5,6 @@ on:
       - develop
       - main # Default release branch, may also be named 'master' or 'develop'
 jobs:
-  run_if:
   publish:
     name: build, pack & publish
     runs-on: ubuntu-latest
