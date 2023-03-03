@@ -22,47 +22,580 @@ namespace Website.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Website.Domain.Aggregates.ContactUsMessages.ContactUsMessage", b =>
+            modelBuilder.Entity("CategoryPost", b =>
+                {
+                    b.Property<Guid>("CategoriesId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("PostsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("CategoriesId", "PostsId");
+
+                    b.HasIndex("PostsId");
+
+                    b.ToTable("CategoryPosts");
+                });
+
+            modelBuilder.Entity("KeywordPost", b =>
+                {
+                    b.Property<Guid>("KeywordsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("PostsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("KeywordsId", "PostsId");
+
+                    b.HasIndex("PostsId");
+
+                    b.ToTable("KeywordPosts");
+                });
+
+            modelBuilder.Entity("Website.Domain.Aggregates.Blog.Comment", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWSEQUENTIALID()");
 
                     b.Property<DateTimeOffset?>("CheckedDate")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTimeOffset>("CreatedDate")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FullName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsChecked")
                         .HasColumnType("bit");
 
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid?>("ParentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("PostId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Version")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Messages");
+                    b.HasIndex("ParentId");
+
+                    b.HasIndex("PostId");
+
+                    b.ToTable("PostComments", (string)null);
+                });
+
+            modelBuilder.Entity("Website.Domain.Aggregates.Blog.Keyword", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWSEQUENTIALID()");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Version")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PostsKeywords", (string)null);
+                });
+
+            modelBuilder.Entity("Website.Domain.Aggregates.Blog.Post", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWSEQUENTIALID()");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsPublished")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("UpdatedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Version")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Posts", (string)null);
+                });
+
+            modelBuilder.Entity("Website.Domain.Aggregates.Categories.Category", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWSEQUENTIALID()");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Version")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Catecories", (string)null);
+                });
+
+            modelBuilder.Entity("CategoryPost", b =>
+                {
+                    b.HasOne("Website.Domain.Aggregates.Categories.Category", null)
+                        .WithMany()
+                        .HasForeignKey("CategoriesId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Website.Domain.Aggregates.Blog.Post", null)
+                        .WithMany()
+                        .HasForeignKey("PostsId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("KeywordPost", b =>
+                {
+                    b.HasOne("Website.Domain.Aggregates.Blog.Keyword", null)
+                        .WithMany()
+                        .HasForeignKey("KeywordsId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Website.Domain.Aggregates.Blog.Post", null)
+                        .WithMany()
+                        .HasForeignKey("PostsId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Website.Domain.Aggregates.Blog.Comment", b =>
+                {
+                    b.HasOne("Website.Domain.Aggregates.Blog.Comment", "Parent")
+                        .WithMany("Replies")
+                        .HasForeignKey("ParentId");
+
+                    b.HasOne("Website.Domain.Aggregates.Blog.Post", "Post")
+                        .WithMany("Comments")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.OwnsOne("Website.Domain.Aggregates.Blog.ValueObjects.PostCommentContent", "Content", b1 =>
+                        {
+                            b1.Property<Guid>("CommentId")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("Content");
+
+                            b1.HasKey("CommentId");
+
+                            b1.ToTable("PostComments");
+
+                            b1.WithOwner()
+                                .HasForeignKey("CommentId");
+                        });
+
+                    b.Navigation("Content")
+                        .IsRequired();
+
+                    b.Navigation("Parent");
+
+                    b.Navigation("Post");
+                });
+
+            modelBuilder.Entity("Website.Domain.Aggregates.Blog.Keyword", b =>
+                {
+                    b.OwnsOne("Website.Domain.Aggregates.Blog.ValueObjects.PostKeywordName", "Name", b1 =>
+                        {
+                            b1.Property<Guid>("KeywordId")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("Name");
+
+                            b1.HasKey("KeywordId");
+
+                            b1.ToTable("PostsKeywords");
+
+                            b1.WithOwner()
+                                .HasForeignKey("KeywordId");
+                        });
+
+                    b.OwnsOne("Website.Domain.Aggregates.Blog.ValueObjects.PostKeywordSlug", "Slug", b1 =>
+                        {
+                            b1.Property<Guid>("KeywordId")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("Slug");
+
+                            b1.HasKey("KeywordId");
+
+                            b1.ToTable("PostsKeywords");
+
+                            b1.WithOwner()
+                                .HasForeignKey("KeywordId");
+                        });
+
+                    b.OwnsOne("Website.Domain.Aggregates.Blog.ValueObjects.PostKeywordTitle", "Title", b1 =>
+                        {
+                            b1.Property<Guid>("KeywordId")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("Title");
+
+                            b1.HasKey("KeywordId");
+
+                            b1.ToTable("PostsKeywords");
+
+                            b1.WithOwner()
+                                .HasForeignKey("KeywordId");
+                        });
+
+                    b.Navigation("Name")
+                        .IsRequired();
+
+                    b.Navigation("Slug")
+                        .IsRequired();
+
+                    b.Navigation("Title")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Website.Domain.Aggregates.Blog.Post", b =>
+                {
+                    b.OwnsOne("Website.Domain.Aggregates.Blog.ValueObjects.PostContent", "Content", b1 =>
+                        {
+                            b1.Property<Guid>("PostId")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("Content");
+
+                            b1.HasKey("PostId");
+
+                            b1.ToTable("Posts");
+
+                            b1.WithOwner()
+                                .HasForeignKey("PostId");
+                        });
+
+                    b.OwnsOne("Website.Domain.Aggregates.Blog.ValueObjects.PostDescription", "Description", b1 =>
+                        {
+                            b1.Property<Guid>("PostId")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("Description");
+
+                            b1.HasKey("PostId");
+
+                            b1.ToTable("Posts");
+
+                            b1.WithOwner()
+                                .HasForeignKey("PostId");
+                        });
+
+                    b.OwnsOne("Website.Domain.Aggregates.Blog.ValueObjects.PostImageUrl", "ImageUrl", b1 =>
+                        {
+                            b1.Property<Guid>("PostId")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("ImageUrl");
+
+                            b1.HasKey("PostId");
+
+                            b1.ToTable("Posts");
+
+                            b1.WithOwner()
+                                .HasForeignKey("PostId");
+                        });
+
+                    b.OwnsOne("Website.Domain.Aggregates.Blog.ValueObjects.PostSeoDescription", "SeoDescription", b1 =>
+                        {
+                            b1.Property<Guid>("PostId")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("SeoDescription");
+
+                            b1.HasKey("PostId");
+
+                            b1.ToTable("Posts");
+
+                            b1.WithOwner()
+                                .HasForeignKey("PostId");
+                        });
+
+                    b.OwnsOne("Website.Domain.Aggregates.Blog.ValueObjects.PostSeoTitle", "SeoTitle", b1 =>
+                        {
+                            b1.Property<Guid>("PostId")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("SeoTitle");
+
+                            b1.HasKey("PostId");
+
+                            b1.ToTable("Posts");
+
+                            b1.WithOwner()
+                                .HasForeignKey("PostId");
+                        });
+
+                    b.OwnsOne("Website.Domain.Aggregates.Blog.ValueObjects.PostSlug", "Slug", b1 =>
+                        {
+                            b1.Property<Guid>("PostId")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("Slug");
+
+                            b1.HasKey("PostId");
+
+                            b1.ToTable("Posts");
+
+                            b1.WithOwner()
+                                .HasForeignKey("PostId");
+                        });
+
+                    b.OwnsOne("Website.Domain.Aggregates.Blog.ValueObjects.PostTitle", "Title", b1 =>
+                        {
+                            b1.Property<Guid>("PostId")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("Title");
+
+                            b1.HasKey("PostId");
+
+                            b1.ToTable("Posts");
+
+                            b1.WithOwner()
+                                .HasForeignKey("PostId");
+                        });
+
+                    b.OwnsMany("Website.Domain.Aggregates.Blog.ValueObjects.View", "Views", b1 =>
+                        {
+                            b1.Property<Guid>("PostId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<int>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("int");
+
+                            SqlServerPropertyBuilderExtensions.UseIdentityColumn(b1.Property<int>("Id"), 1L, 1);
+
+                            b1.Property<DateTime>("ViewDate")
+                                .HasColumnType("datetime2");
+
+                            b1.HasKey("PostId", "Id");
+
+                            b1.ToTable("PostViews", (string)null);
+
+                            b1.WithOwner()
+                                .HasForeignKey("PostId");
+
+                            b1.OwnsOne("Website.Domain.Aggregates.Blog.ValueObjects.PostViewUserIp", "UserIp", b2 =>
+                                {
+                                    b2.Property<Guid>("ViewPostId")
+                                        .HasColumnType("uniqueidentifier");
+
+                                    b2.Property<int>("ViewId")
+                                        .HasColumnType("int");
+
+                                    b2.Property<string>("Value")
+                                        .IsRequired()
+                                        .HasColumnType("nvarchar(max)")
+                                        .HasColumnName("UserIp");
+
+                                    b2.HasKey("ViewPostId", "ViewId");
+
+                                    b2.ToTable("PostViews");
+
+                                    b2.WithOwner()
+                                        .HasForeignKey("ViewPostId", "ViewId");
+                                });
+
+                            b1.Navigation("UserIp")
+                                .IsRequired();
+                        });
+
+                    b.Navigation("Content")
+                        .IsRequired();
+
+                    b.Navigation("Description")
+                        .IsRequired();
+
+                    b.Navigation("ImageUrl")
+                        .IsRequired();
+
+                    b.Navigation("SeoDescription")
+                        .IsRequired();
+
+                    b.Navigation("SeoTitle")
+                        .IsRequired();
+
+                    b.Navigation("Slug")
+                        .IsRequired();
+
+                    b.Navigation("Title")
+                        .IsRequired();
+
+                    b.Navigation("Views");
+                });
+
+            modelBuilder.Entity("Website.Domain.Aggregates.Categories.Category", b =>
+                {
+                    b.OwnsOne("Website.Domain.Aggregates.Categories.ValueObjects.CategoryDescription", "Description", b1 =>
+                        {
+                            b1.Property<Guid>("CategoryId")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("Description");
+
+                            b1.HasKey("CategoryId");
+
+                            b1.ToTable("Catecories");
+
+                            b1.WithOwner()
+                                .HasForeignKey("CategoryId");
+                        });
+
+                    b.OwnsOne("Website.Domain.Aggregates.Categories.ValueObjects.CategoryName", "Name", b1 =>
+                        {
+                            b1.Property<Guid>("CategoryId")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("Name");
+
+                            b1.HasKey("CategoryId");
+
+                            b1.ToTable("Catecories");
+
+                            b1.WithOwner()
+                                .HasForeignKey("CategoryId");
+                        });
+
+                    b.OwnsOne("Website.Domain.Aggregates.Categories.ValueObjects.CategorySlug", "Slug", b1 =>
+                        {
+                            b1.Property<Guid>("CategoryId")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("Slug");
+
+                            b1.HasKey("CategoryId");
+
+                            b1.ToTable("Catecories");
+
+                            b1.WithOwner()
+                                .HasForeignKey("CategoryId");
+                        });
+
+                    b.OwnsOne("Website.Domain.Aggregates.Categories.ValueObjects.CategoryTitle", "Title", b1 =>
+                        {
+                            b1.Property<Guid>("CategoryId")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("Title");
+
+                            b1.HasKey("CategoryId");
+
+                            b1.ToTable("Catecories");
+
+                            b1.WithOwner()
+                                .HasForeignKey("CategoryId");
+                        });
+
+                    b.Navigation("Description");
+
+                    b.Navigation("Name")
+                        .IsRequired();
+
+                    b.Navigation("Slug")
+                        .IsRequired();
+
+                    b.Navigation("Title")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Website.Domain.Aggregates.Blog.Comment", b =>
+                {
+                    b.Navigation("Replies");
+                });
+
+            modelBuilder.Entity("Website.Domain.Aggregates.Blog.Post", b =>
+                {
+                    b.Navigation("Comments");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,3 +1,5 @@
+using Website.Domain.Contracts;
+
 namespace Website.Application.ContactUsMessages.Commands.MarkMessageAsChecked;
 
 internal sealed class MarkMessageAsCheckedCommandHandler : ICommandHandler<MarkMessageAsCheckedCommand, BaseResponse<Guid>>

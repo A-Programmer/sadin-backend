@@ -1,5 +1,8 @@
 using Website.Domain;
+using Website.Domain.Aggregates.Blog;
+using Website.Domain.Aggregates.Categories;
 using Website.Domain.Aggregates.ContactUsMessages;
+using Website.Domain.Contracts;
 using Website.Infrastructure.Data;
 using Website.Infrastructure.Repositories;
 
@@ -12,6 +15,14 @@ public class UnitOfWork : IUnitOfWork
     
     private ContactUsRepository _contactUsMessages;
     public IContactUsRepository ContactUsMessages => _contactUsMessages ??= new ContactUsRepository(_db);
+
+    private PostsRepository _posts;
+    public IPostsRepository Posts => _posts ??= new(_db);
+
+    private CategoriesRepository _categories;
+    public ICategoriesRepository Categories => _categories ??= new CategoriesRepository(_db);
+    
+
     public async Task<int> CommitAsync()
     {
         return await _db.SaveChangesAsync();

@@ -1,3 +1,5 @@
+using Website.Domain.Contracts;
+
 namespace Website.Application.ContactUsMessages.Commands.MarkMessageAsUnchecked;
 
 internal sealed class MarkMessageAsUncheckedCommandHandler : ICommandHandler<MarkMessageAsUncheckedCommand, BaseResponse<Guid>>

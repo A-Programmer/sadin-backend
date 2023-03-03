@@ -1,3 +1,5 @@
+using Website.Domain.Contracts;
+
 namespace Website.Application.ContactUsMessages.Queries.GetPagedMessages;
 
 internal sealed class GetPagedMessagesQueryHandler : IQueryHandler<GetPagedMessagesQuery, PaginatedList<GetPagedMessagesDto>>

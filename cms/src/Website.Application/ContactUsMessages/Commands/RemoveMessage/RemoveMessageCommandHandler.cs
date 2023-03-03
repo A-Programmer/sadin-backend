@@ -1,3 +1,5 @@
+using Website.Domain.Contracts;
+
 namespace Website.Application.ContactUsMessages.Commands.RemoveMessage;
 
 internal sealed class RemoveMessageCommandHandler : ICommandHandler<RemoveMessageCommand, BaseResponse<Guid>>

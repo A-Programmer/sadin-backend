@@ -3,7 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Website.Domain;
+using Website.Domain.Aggregates.Categories;
+using Website.Domain.Contracts;
 using Website.Infrastructure.Data;
+using Website.Infrastructure.Repositories;
 
 namespace Website.Infrastructure;
 
@@ -22,12 +25,12 @@ public static class Extensions
 
     public static IApplicationBuilder UseInfrastructureLayer(this IApplicationBuilder app)
     {
-        using (var serviceScope = ((IApplicationBuilder)app).ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+        using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
         {
             var context = serviceScope.ServiceProvider.GetRequiredService<WebsiteDbContext>();
             context.Database.Migrate();
         }
-        using(var serviceScope = ((IApplicationBuilder)app).ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+        using(var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
         {
             var context = serviceScope.ServiceProvider.GetRequiredService<WebsiteDbContext>();
             DataSeeder.Seed(context);
