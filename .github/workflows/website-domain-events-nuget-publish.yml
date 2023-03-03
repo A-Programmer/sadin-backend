@@ -2,6 +2,7 @@ name: publish to nuget
 on:
   push:
     branches:
+      - develop
       - main # Default release branch, may also be named 'master' or 'develop'
 jobs:
   run_if:
