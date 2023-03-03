@@ -1,4 +1,5 @@
 using Website.Domain.Aggregates.ContactUsMessages;
+using Website.Domain.Contracts;
 
 namespace Website.Application.ContactUsMessages.Commands.CreateMessage;
 

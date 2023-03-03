@@ -7,9 +7,9 @@ public class ContactUsMessageTests
     {
         string title = "Title";
         string content = "Content";
-        string fullName = "Kamran Sadin";
-        string email = "MrSadin@Gmail.Com";
-        string phoneNumber = "+989308638095";
+        string? fullName = "Kamran Sadin";
+        string? email = "MrSadin@Gmail.Com";
+        string? phoneNumber = "+989308638095";
         
         ContactUsMessage contactMessage = ContactUsMessage.Create(title, content, fullName, email, phoneNumber);
         

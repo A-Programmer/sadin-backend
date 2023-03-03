@@ -13,6 +13,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ContactUsMessages\Queries" />
+    <Folder Include="Categories\Commands" />
+    <Folder Include="Posts\Commands" />
+    <Folder Include="Posts\Queries" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Common\.DS_Store" />

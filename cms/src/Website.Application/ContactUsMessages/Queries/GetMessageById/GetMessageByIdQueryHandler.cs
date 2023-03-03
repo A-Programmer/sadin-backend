@@ -1,3 +1,5 @@
+using Website.Domain.Contracts;
+
 namespace Website.Application.ContactUsMessages.Queries.GetMessageById;
 
 internal sealed class GetMessageByIdQueryHandler : IQueryHandler<GetMessageByIdQuery, GetMessageByIdDto>

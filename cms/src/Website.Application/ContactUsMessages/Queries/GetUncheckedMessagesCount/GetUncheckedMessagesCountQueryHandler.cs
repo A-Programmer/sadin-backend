@@ -1,3 +1,5 @@
+using Website.Domain.Contracts;
+
 namespace Website.Application.ContactUsMessages.Queries.GetUncheckedMessagesCount;
 
 internal sealed  class GetUncheckedMessagesCountQueryHandler : IQueryHandler<GetUncheckedMessagesCountQuery, int>
