@@ -40,57 +40,17 @@ public sealed class Comment : EntityWithSoftDelete, ISerializable
         
     }
 
-    public Comment SetParentId(Guid? parentId)
-    {
-        ParentId = parentId;
-        return this;
-    }
+    internal void AddReply(Comment reply) => _replies.Add(reply);
 
-    public Comment SetPostId(Guid postId)
-    {
-        PostId = postId;
-        return this;
-    }
+    internal void Approve() => IsApproved = true;
 
-    public void AddReply(Comment reply) => _replies.Add(reply);
+    internal void Reject() => IsApproved = false;
 
-    public Comment ChangeApproveStatus(bool isApproved)
-    {
-        IsApproved = isApproved;
-        return this;
-    }
+    internal void Checked() => IsChecked = true;
 
-    public Comment Approve()
-    {
-        IsApproved = true;
-        return this;
-    }
+    internal void NotChecked() => IsChecked = false;
 
-    public Comment Reject()
-    {
-        IsApproved = false;
-        return this;
-    }
-
-    public Comment ChangeCheckStatus(bool newCheckStatus)
-    {
-        IsChecked = newCheckStatus;
-        return this;
-    }
-
-    public Comment Checked()
-    {
-        IsChecked = true;
-        return this;
-    }
-
-    public Comment NotChecked()
-    {
-        IsChecked = false;
-        return this;
-    }
-
-    public void SetReplies(List<Comment> postComment) => _replies = postComment;
+    internal void SetReplies(List<Comment> postComment) => _replies = postComment;
     
     
     #region Serialization

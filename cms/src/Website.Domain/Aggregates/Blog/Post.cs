@@ -1,6 +1,8 @@
 using System.Runtime.Serialization;
 using KSFramework.Primitives;
 using Website.Domain.Aggregates.Blog.ValueObjects;
+using Website.Domain.Aggregates.Categories;
+using Website.Domain.Events.Blog;
 
 namespace Website.Domain.Aggregates.Blog;
 
@@ -111,6 +113,7 @@ public sealed class Post : AggregateRootWithSoftDelete, ISerializable
     public Post Publish()
     {
         IsPublished = true;
+        AddDomainEvent(new PostPublishedEvent(this.Id));
         return SetUpdateDate();
     }
 
@@ -126,12 +129,29 @@ public sealed class Post : AggregateRootWithSoftDelete, ISerializable
         return this;
     }
 
-    public void AddComment(Comment comment) => _comments.Add(comment);
+    public void AddView(View view) => _views.Add(view);
+
+    public void ReplyToComment(Comment parent, Comment reply)
+    {
+        parent.AddReply(reply);
+        AddDomainEvent(new RepliedToPostCommentEvent(this.Id, parent.Id, reply.Id));
+    }
+    public void AddComment(Comment comment)
+    {
+        _comments.Add(comment);
+        AddDomainEvent(new PostCommentAddedEvent(this.Id, comment.Id));
+    }
 
     public void RemoveComment(Comment comment) => _comments.Remove(comment);
+    public void ApproveComment(Comment comment)
+    {
+        comment.Approve();
+        AddDomainEvent(new PostCommentApprovedEvent(this.Id, comment.Id));
+    }
+    public void RejectComment(Comment comment) => comment.Reject();
+    public void MarkAsCheckedComment(Comment comment) => comment.Checked();
+    public void MaskAsUnChecked(Comment comment) => comment.NotChecked();
 
-    public void AddView(View view) => _views.Add(view);
-    
     protected Post(Guid id)
         : base(id)
     {

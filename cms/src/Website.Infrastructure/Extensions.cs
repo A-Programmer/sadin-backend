@@ -3,7 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Website.Domain;
+using Website.Domain.Aggregates.Categories;
+using Website.Domain.Contracts;
 using Website.Infrastructure.Data;
+using Website.Infrastructure.Repositories;
 
 namespace Website.Infrastructure;
 

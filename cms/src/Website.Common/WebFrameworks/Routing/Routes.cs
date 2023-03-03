@@ -27,17 +27,18 @@ public static class Routes
         }
     }
 
+    public static class Categories
+    {
+        public static class Get
+        {
+            public const string GetAll = "";
+            public const string GetById = "{id}";
+            public const string GetBySlug = "{slug}";
+        }
+    }
+    
     public static class Posts
     {
-        public static class Categories
-        {
-            public static class Get
-            {
-                public const string GetAll = "";
-                public const string GetById = "{id}";
-                public const string GetBySlug = "{slug}";
-            }
-        }
         public static class Post
         {
             public const string Add = "";

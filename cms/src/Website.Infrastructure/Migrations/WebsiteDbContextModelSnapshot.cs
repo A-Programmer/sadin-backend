@@ -52,24 +52,6 @@ namespace Website.Infrastructure.Migrations
                     b.ToTable("KeywordPosts");
                 });
 
-            modelBuilder.Entity("Website.Domain.Aggregates.Blog.Category", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasDefaultValueSql("NEWSEQUENTIALID()");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("Version")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PostCategories", (string)null);
-                });
-
             modelBuilder.Entity("Website.Domain.Aggregates.Blog.Comment", b =>
                 {
                     b.Property<Guid>("Id")
@@ -155,9 +137,27 @@ namespace Website.Infrastructure.Migrations
                     b.ToTable("Posts", (string)null);
                 });
 
+            modelBuilder.Entity("Website.Domain.Aggregates.Categories.Category", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWSEQUENTIALID()");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Version")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Catecories", (string)null);
+                });
+
             modelBuilder.Entity("CategoryPost", b =>
                 {
-                    b.HasOne("Website.Domain.Aggregates.Blog.Category", null)
+                    b.HasOne("Website.Domain.Aggregates.Categories.Category", null)
                         .WithMany()
                         .HasForeignKey("CategoriesId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -182,96 +182,6 @@ namespace Website.Infrastructure.Migrations
                         .WithMany()
                         .HasForeignKey("PostsId")
                         .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Website.Domain.Aggregates.Blog.Category", b =>
-                {
-                    b.OwnsOne("Website.Domain.Aggregates.Blog.ValueObjects.PostCategoryDescription", "Description", b1 =>
-                        {
-                            b1.Property<Guid>("CategoryId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<string>("Value")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)")
-                                .HasColumnName("Description");
-
-                            b1.HasKey("CategoryId");
-
-                            b1.ToTable("PostCategories");
-
-                            b1.WithOwner()
-                                .HasForeignKey("CategoryId");
-                        });
-
-                    b.OwnsOne("Website.Domain.Aggregates.Blog.ValueObjects.PostCategoryName", "Name", b1 =>
-                        {
-                            b1.Property<Guid>("CategoryId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<string>("Value")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)")
-                                .HasColumnName("Name");
-
-                            b1.HasKey("CategoryId");
-
-                            b1.ToTable("PostCategories");
-
-                            b1.WithOwner()
-                                .HasForeignKey("CategoryId");
-                        });
-
-                    b.OwnsOne("Website.Domain.Aggregates.Blog.ValueObjects.PostCategorySlug", "Slug", b1 =>
-                        {
-                            b1.Property<Guid>("CategoryId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<string>("Value")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)")
-                                .HasColumnName("Slug");
-
-                            b1.HasKey("CategoryId");
-
-                            b1.ToTable("PostCategories");
-
-                            b1.WithOwner()
-                                .HasForeignKey("CategoryId");
-                        });
-
-                    b.OwnsOne("Website.Domain.Aggregates.Blog.ValueObjects.PostCategoryTitle", "Title", b1 =>
-                        {
-                            b1.Property<Guid>("CategoryId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<string>("Value")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)")
-                                .HasColumnName("Title");
-
-                            b1.HasKey("CategoryId");
-
-                            b1.ToTable("PostCategories");
-
-                            b1.WithOwner()
-                                .HasForeignKey("CategoryId");
-                        });
-
-                    b.Navigation("Description");
-
-                    b.Navigation("Name")
-                        .IsRequired();
-
-                    b.Navigation("Slug")
-                        .IsRequired();
-
-                    b.Navigation("Title")
                         .IsRequired();
                 });
 
@@ -586,6 +496,96 @@ namespace Website.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Views");
+                });
+
+            modelBuilder.Entity("Website.Domain.Aggregates.Categories.Category", b =>
+                {
+                    b.OwnsOne("Website.Domain.Aggregates.Categories.ValueObjects.CategoryDescription", "Description", b1 =>
+                        {
+                            b1.Property<Guid>("CategoryId")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("Description");
+
+                            b1.HasKey("CategoryId");
+
+                            b1.ToTable("Catecories");
+
+                            b1.WithOwner()
+                                .HasForeignKey("CategoryId");
+                        });
+
+                    b.OwnsOne("Website.Domain.Aggregates.Categories.ValueObjects.CategoryName", "Name", b1 =>
+                        {
+                            b1.Property<Guid>("CategoryId")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("Name");
+
+                            b1.HasKey("CategoryId");
+
+                            b1.ToTable("Catecories");
+
+                            b1.WithOwner()
+                                .HasForeignKey("CategoryId");
+                        });
+
+                    b.OwnsOne("Website.Domain.Aggregates.Categories.ValueObjects.CategorySlug", "Slug", b1 =>
+                        {
+                            b1.Property<Guid>("CategoryId")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("Slug");
+
+                            b1.HasKey("CategoryId");
+
+                            b1.ToTable("Catecories");
+
+                            b1.WithOwner()
+                                .HasForeignKey("CategoryId");
+                        });
+
+                    b.OwnsOne("Website.Domain.Aggregates.Categories.ValueObjects.CategoryTitle", "Title", b1 =>
+                        {
+                            b1.Property<Guid>("CategoryId")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("Title");
+
+                            b1.HasKey("CategoryId");
+
+                            b1.ToTable("Catecories");
+
+                            b1.WithOwner()
+                                .HasForeignKey("CategoryId");
+                        });
+
+                    b.Navigation("Description");
+
+                    b.Navigation("Name")
+                        .IsRequired();
+
+                    b.Navigation("Slug")
+                        .IsRequired();
+
+                    b.Navigation("Title")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Website.Domain.Aggregates.Blog.Comment", b =>

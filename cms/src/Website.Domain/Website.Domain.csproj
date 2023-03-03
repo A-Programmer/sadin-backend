@@ -5,9 +5,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="KSFramework" Version="1.2.6" />
+    <PackageReference Include="KSFramework" Version="1.2.9" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Aggregates\Blog\Events" />
     <Folder Include="Aggregates\ContactUsMessages\DomainEvents" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Website.Domain.Events\Website.Domain.Events.csproj" />
+    <ProjectReference Include="..\Website.Domain.Events\Website.Doman.Events.csproj" />
   </ItemGroup>
 </Project>
