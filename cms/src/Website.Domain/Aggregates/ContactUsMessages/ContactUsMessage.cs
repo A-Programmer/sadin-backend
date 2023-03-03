@@ -32,8 +32,13 @@ public sealed class ContactUsMessage : AggregateRootWithSoftDelete, ISerializabl
     }
 
     public static ContactUsMessage Create(string title, string content, string? fullName = null, string? email = null,
-        string? phoneNumber = null) =>  new(Guid.NewGuid(), title, content, DateTimeOffset.UtcNow, false, null, fullName,
+        string? phoneNumber = null)
+    {
+        ContactUsMessage message = new(Guid.NewGuid(), title, content, DateTimeOffset.UtcNow, false, null, fullName,
             email, phoneNumber);
+        // AddDomainEvent(new );
+        return message;
+    }
 
     public void MarkAsChecked()
     {

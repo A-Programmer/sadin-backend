@@ -6,6 +6,7 @@ using Website.Domain;
 using Website.Domain.Aggregates.Categories;
 using Website.Domain.Contracts;
 using Website.Infrastructure.Data;
+using Website.Infrastructure.Interceptors;
 using Website.Infrastructure.Repositories;
 
 namespace Website.Infrastructure;
@@ -14,10 +15,13 @@ public static class Extensions
 {
     public static IServiceCollection AddInfrastructureLayerServices(this IServiceCollection services, IConfiguration configurations)
     {
-        services.AddDbContext<WebsiteDbContext>(options =>
+        services.AddSingleton<ConvertDomainEventsToOutboxMessageInterceptor>();
+        services.AddDbContext<WebsiteDbContext>((sp, options) =>
         {
+            var interceptor = sp.GetService<ConvertDomainEventsToOutboxMessageInterceptor>();
             options.UseSqlServer(
-                configurations.GetConnectionString("SqlServerConnection"));
+                configurations.GetConnectionString("SqlServerConnection"))
+                .AddInterceptors(interceptor);
         });
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         return services;

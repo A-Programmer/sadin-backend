@@ -8,7 +8,6 @@
     <PackageReference Include="KSFramework" Version="1.2.9" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Aggregates\Blog\Events" />
     <Folder Include="Aggregates\ContactUsMessages\DomainEvents" />
   </ItemGroup>
   <ItemGroup>
